@@ -1,6 +1,7 @@
 # terraform-ansible-inventory
 
-Simple module to render Ansible inventory file
+Simple module to render Ansible inventory file. It works well in situations when you provision
+your servers with Terraform, and later you want to do something to them with Ansible.
 
 ## Usage
 
