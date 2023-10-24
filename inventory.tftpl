@@ -1,0 +1,24 @@
+%{ for host, vars in hosts ~}
+${host} %{ for var, val in vars ~}${var}=${val} %{ endfor }
+%{ endfor }
+
+%{ for group, hosts in groups ~}
+[${group}]
+%{ for _, host in hosts ~}
+${host}
+%{ endfor }
+%{ endfor }
+
+%{ for group, vars in group_vars ~}
+[${group}:vars]
+%{ for var, val in vars ~}
+${var}=${val}
+%{ endfor }
+%{ endfor }
+
+%{ for group, children in group_children ~}
+[${group}:children]
+%{ for _, group in children ~}
+${group}
+%{ endfor }
+%{ endfor }
