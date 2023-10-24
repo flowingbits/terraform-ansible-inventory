@@ -66,10 +66,10 @@ output "ansible-inventory" {
 The above example will produce the following inventory output:
 
 ```ini
-host1 ansible_host=10.0.0.1 other_host1_var=other_host1_var_value
-host2 ansible_host=10.0.0.2 other_host2_var=other_host2_var_value
-host3 ansible_host=10.0.0.3 other_host1_var=other_host1_var_value
-host4 ansible_host=10.0.0.4 other_host2_var=other_host2_var_value
+host1 ansible_host = 10.0.0.1 other_host1_var=other_host1_var_value
+host2 ansible_host = 10.0.0.2 other_host2_var=other_host2_var_value
+host3 ansible_host = 10.0.0.3 other_host1_var=other_host1_var_value
+host4 ansible_host = 10.0.0.4 other_host2_var=other_host2_var_value
 
 
 [group1]
@@ -83,12 +83,21 @@ host4
 
 
 [group1:vars]
-group1_var1=group1_var1_value
-group1_var2=group1_var2_value
+group1_var1 = group1_var1_value
+group1_var2 = group1_var2_value
 
 
 
 [other_group:children]
 group1
 group2
+```
+
+You can use it with `local_file` to write it to you working directory and use later with Ansible:
+
+```terraform
+resource "local_file" "ansible-inventory" {
+  filename = "inventory.ini"
+  content  = module.ansible-inventory.result
+}
 ```
